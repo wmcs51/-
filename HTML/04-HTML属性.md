@@ -6,30 +6,30 @@
 - 属性表示在**开始标签**中
 - 属性通常以“名/值”对出现，比如：**name="value"**
 ## href属性
-HTML链接通常定义在`<a>`标签。链接地址在href属性中表示：
+HTML链接通常定义在`<a>`标签。链接地址在`href`属性中表示：
 ```
 <a href="https://www.w3schools.com">This is a link</a>
 ```
 ## src属性
 HTML图片在`<img>`标签中定义。  
-图片路径在src属性中表示：
+图片路径在`src`属性中表示：
 ```
 <img src="img_girl.jpg">
 ```
 ## height和width属性
-HTML图片还有高度（width）和宽度（height）属性：
+HTML图片还有高度`width`和宽度`height`属性：
 ```
 <img src="img_girl.jpg" width="500" height="600">
 ```
 高度和宽度默认由像素（pixel）表示，所以`width="500"`意味着500p宽。
 ## alt属性
-alt属性表示替代文字，如果图片不能被展示。  
-alt属性值能被屏幕朗读器读到。这样的话，一些人（比如视障人士）听网页的时候，能听到元素。
+`alt`属性表示替代文字，如果图片不能被展示。  
+`alt`属性值能被屏幕朗读器读到。这样的话，一些人（比如视障人士）听网页的时候，能听到元素。
 ```
 <img src="img_girl.jpg" alt="Girl with a jacket">
 ```
 ## style属性
-样式（style）属性用于表示元素样式，例如颜色（color），字体（font），大小（size）等等.
+样式`style`属性用于表示元素样式，例如颜色`color`，字体`font`，尺寸`size`等等.
 ```
 <p style="color:red">This is a red paragraph.</p>
 ```
