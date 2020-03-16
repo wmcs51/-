@@ -25,7 +25,8 @@
 按Ctrl + S组合键进行保存，文件名为index.html（也可以用.htm的后缀），点击保存按钮。
 默认保存路径为文档，也可以选择保存在桌面。
 保存完后双击打开保存的文件，系统会选择默认浏览器展示HTML页面。
+![浏览器展示效果](https://www.w3schools.com/html/img_chrome.png)
 # 使用vs code
-Visual Studio Code，一款微软开发的编辑器，下载地址[在此]([https://code.visualstudio.com/](https://code.visualstudio.com/)
+Visual Studio Code，一款微软开发的编辑器，下载地址[在此](https://code.visualstudio.com/)
 )。
 用户更多，开源免费，好处多多。
