@@ -22,6 +22,7 @@ HTML是创建网页的标准标记语言
 </body>
 </html>
 ```
+
 例子解释：
 - <!DOCTYPE html>宣称定义这个文档是HTML5
 - <html>元素是这个HTML页面的根元素
