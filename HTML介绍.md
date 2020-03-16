@@ -1,4 +1,4 @@
-##什么是HTML
+#什么是HTML
 HTML是创建网页的标准标记语言
 - HTML是指超文本标记语言（Hyper Text Markup Language）
 - HTML描述网页的结构
@@ -7,7 +7,7 @@ HTML是创建网页的标准标记语言
 - HTML元素由标签（tag）表示
 - HTML标签有"heading", "paragraph", "table"之类的标记内容
 - 浏览器并不展示标签，而是用其渲染网页内容
-##一个简单的HTML文档
+#一个简单的HTML文档
 ```
 <!DOCTYPE html>
 <html>
@@ -23,16 +23,16 @@ HTML是创建网页的标准标记语言
 </html>
 ```
 之后将会解释这个例子
-##HTML标签
+#HTML标签
 HTML标签是尖括号包围的元素名
 > <标签名称>一些内容</标签名称>
 - 通常来说标签成对出现，例如`<p>`和`</p>`
 - 标签对中第一个标签是开始标签（start tag / opening tag），第二个标签是结束标签（end tag / closing tag）
 - 结束标签与开始标签的不同在于结束标签名之前有斜杠符号（slash）
-##浏览器
+#浏览器
 浏览器用于读取和展示HTML文档
 浏览器并不会展示HTML标签，而是通过它们决定如何展示文档
-##HTML历史
+#HTML历史
 从万维网早期至今有许多版本的HTML
 |年代|版本|
 |:-:|:-:|
