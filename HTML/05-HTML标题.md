@@ -40,7 +40,7 @@ HTML`<head>`元素是元数据（metadata）的容器。HTML元数据是HTML文�
 在浏览器页面处点击右键，点击检查。或者按F12快捷键
 ## HTML标签引用
 |标签|描述|
-|-|-|
+|-|---|
 |[`<html>`](https://www.w3schools.com/tags/tag_html.asp)|定义HTML文档的根元素|
 |[`<body>`](https://www.w3schools.com/tags/tag_body.asp)|定义HTML文档的身|
 |[`<head>`](https://www.w3schools.com/tags/tag_head.asp)|所有头元素的容器|
