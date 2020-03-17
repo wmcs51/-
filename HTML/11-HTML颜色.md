@@ -1,7 +1,7 @@
 # HTML颜色
 HTML颜色使用预先定义好的颜色名称，或者RGB, HEX, HSL, RGBA, HSLA值。
 ## 颜色名称
-HTML中，一种颜色可以通过使用颜色名表示，例如Orange表示橙色，Gray表示灰色  
+HTML中，一种颜色可以通过使用颜色名表示，例如Orange表示橙色，Gray表示灰色。  
 HTML支持[140种标准颜色名称](https://www.w3schools.com/colors/colors_names.asp)。
 ## 背景颜色
 你可以设置HTML元素的背景颜色：  
@@ -55,10 +55,11 @@ HTML中，颜色可以用十六进制（hexadecimal）值表示：
 
 这里rr红gg绿bb蓝是从00到ff的十六进制值，对应十进制的0-255。  
 例如，#ff0000表示红色，因为红色参数被设置成最高值ff，其它值设置为最低00。
-#HTML HSL颜色
+# HTML HSL颜色
 ## HSL值
 在HTML中，颜色可以使用色调（hue），饱和度（saturation），亮度（lightness）来表示：
 > hsl(hue,saturation,lightness)
+
 色调是调色盘中的度数，从0至360.0。0是红色，120是绿色，240是蓝色。  
 饱和度是百分值，0%表示全灰，100%表示全彩。  
 亮度也是百分值，0%表示黑色，100%表示白色，从0%至100%越来越淡。  
