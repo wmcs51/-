@@ -1,12 +1,12 @@
 ## HTML`<q>`元素
 HTML`<q>`元素定义短引用。  
-浏览器经常在`<q>`元素附近插入引用符号。  
+浏览器经常在`<q>`元素附近插入引用符号。
 ```
 <p>WWF's goal is to: <q>Build a future where people live in harmony with nature.</q></p>
 ```
 效果： WWF's goal is to: "Build a future where people live in harmony with nature."
 ## HTML`<blockquote>`元素
-HTML`<blockquote>`元素定义从其它来源引用的节选。
+HTML`<blockquote>`元素定义从其它来源引用的节选。  
 浏览器通常会独立`<blockquote>`元素。
 ```
 <p>Here is a quote from WWF's website:</p>
@@ -37,13 +37,13 @@ USA
 </address>
 ```
 ## HTML`<cite>`元素
-HTML`<cite>`元素定义作品的名称。
-浏览器通常讲`<cite>`元素展示成斜体。
+HTML`<cite>`元素定义作品的名称。  
+浏览器通常将`<cite>`元素展示成斜体。
 ```
 <p><cite>The Scream</cite> by Edvard Munch. Painted in 1893.</p>
 ```
 ## HTML`<bdo>`元素
-HTML`<bdo>`元素定义双向排列。
+HTML`<bdo>`元素定义双向排列。  
 `<bdo>`元素用于取代当前的字体顺序：
 ```
 <bdo dir="rtl">This text will be written from right to left</bdo>
