@@ -1,5 +1,5 @@
 ## HTML样式属性
-可以通过`style`属性设置HTML元素的样式。  
+可以通过设置HTML元素的`style`属性改变元素样式。  
 HTML`style`属性的句法（syntax）：
 > `<tagname style="property:value;">`
 
