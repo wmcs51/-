@@ -30,3 +30,10 @@ HTML`<pre>`元素定义有排版的文本。
   Oh, bring back my Bonnie to me.
 </pre>
 ```
+## HTML标签引用
+|标签|描述|
+|-|-|
+|[`<p>`](https://www.w3schools.com/tags/tag_p.asp)|定义段落|
+|[`<br>`](https://www.w3schools.com/tags/tag_br.asp)|定义换行|
+|[`<pre>`](https://www.w3schools.com/tags/tag_pre.asp)|定义保留排版的文本|
+
