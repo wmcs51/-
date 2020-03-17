@@ -1,11 +1,12 @@
 ## HTML样式属性
 可以通过`style`属性设置HTML元素的样式。  
-HTML`style`属性的句法：
+HTML`style`属性的句法（syntax）：
 > `<tagname style="property:value;">`
+
 **property**是CSS特性。**value**是CSS值
 CSS另有教程
 ## 背景颜色
-CSS`background-color`特性定义HTML元素的背景颜色
+CSS`background-color`特性定义HTML元素的背景颜色：
 ```
 <body style="background-color:powderblue;">
 
