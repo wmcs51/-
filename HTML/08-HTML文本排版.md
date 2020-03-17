@@ -31,3 +31,16 @@ HTML`<ins>`元素定义插入/下划线的文本。
 HTML`<sub>`元素定义下标文本。
 ## HTML`<sup>`元素
 HTML`<sup>`元素定义上标文本。
+## HTML标签引用
+|标签|描述|
+|-|-|
+|[`<b>`](https://www.w3schools.com/tags/tag_b.asp)|加粗文本|
+|[`<em>`](https://www.w3schools.com/tags/tag_em.asp)|强调文本|
+|[`<i>`](https://www.w3schools.com/tags/tag_i.asp)|倾斜文本|
+|[`<small>`](https://www.w3schools.com/tags/tag_small.asp)|小字体文本|
+|[`<strong>`](https://www.w3schools.com/tags/tag_strong.asp)|重要文本|
+|[`<sub>`](https://www.w3schools.com/tags/tag_sub.asp)|下标文本|
+|[`<sup>`](https://www.w3schools.com/tags/tag_sup.asp)|上标文本|
+|[`<ins>`](https://www.w3schools.com/tags/tag_ins.asp)|插入文本|
+|[`<del>`](https://www.w3schools.com/tags/tag_del.asp)|删除了的文本|
+|[`<mark>`](https://www.w3schools.com/tags/tag_mark.asp)|标记文本|
