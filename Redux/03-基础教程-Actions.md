@@ -1,6 +1,6 @@
 ## Actions
 首先让我们定义一些actions（动作）。
-**actions**是从应用发送信息到store（仓库）的载体。它们是store信息的*唯一*源头。使用它时你需要用到`store.dispatch()`.
+**actions**是从应用发送信息到store（仓库）的载体。它们是store信息的*唯一*源头。使用它时你需要用到`store.dispatch()`。  
 例子，添加一个新的计划项对应的action：
 ```
 const ADD_TODO = 'ADD_TODO'
