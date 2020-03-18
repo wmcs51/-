@@ -32,3 +32,81 @@ action对象除了type之外的结构没有规定，如果乐意的话可以参�
   filter: SHOW_COMPLETED
 }
 ```
+## Action Creators
+**Action Creators**是创建action的函数。action creator容易与action混用，可以的话还是尽量正确使用这两个词。  
+在Redux中，action creators会返回一个action。
+```
+function addTodo(text) {
+  return {
+    type: ADD_TODO,
+    text
+  }
+}
+```
+这使其容易测试，方便移植。  
+在Flux中，调用action creators经常触发dispatch（分发），像这样：
+```
+function addTodoWithDispatch(text) {
+  const action = {
+    type: ADD_TODO,
+    text
+  }
+  dispatch(action)
+}
+```
+Redux不是这样。如果你需要dispatch，你需要把action creators的返回值，也就是action作为参数传入`dispatch()`函数：
+```
+dispatch(addTodo(text))
+dispatch(completeTodo(index))
+```
+你也可以通过创建bound action creator（创建者与分发相绑定）实现自动dispatch。
+```
+const boundAddTodo = text => dispatch(addTodo(text))
+const boundCompleteTodo = index => dispatch(completeTodo(index))
+```
+这样你可以直接调用他们
+```
+boundAddTodo(text)
+boundCompleteTodo(index)
+```
+`dispatch()`函数可以访问store对象来获取，就像这样`store.dispatch()`，但更常见的方法是使用react-redux的`connect()`工具。你可以使用`bindActionCreators()`绑定多个action creator至一个`dispatch()`函数。  
+action creator也可以是异步的，因而有点副作用。你可以在高级教程中进行了解。
+## 源代码
+`actions.js`
+```
+/*
+ * action types
+ */
+
+export const ADD_TODO = 'ADD_TODO'
+export const TOGGLE_TODO = 'TOGGLE_TODO'
+export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+
+/*
+ * other constants
+ */
+
+export const VisibilityFilters = {
+  SHOW_ALL: 'SHOW_ALL',
+  SHOW_COMPLETED: 'SHOW_COMPLETED',
+  SHOW_ACTIVE: 'SHOW_ACTIVE'
+}
+
+/*
+ * action creators
+ */
+
+export function addTodo(text) {
+  return { type: ADD_TODO, text }
+}
+
+export function toggleTodo(index) {
+  return { type: TOGGLE_TODO, index }
+}
+
+export function setVisibilityFilter(filter) {
+  return { type: SET_VISIBILITY_FILTER, filter }
+}
+```
+## 下一步
+创建reducer，描述应用状态变化时怎么样dispatch这些action。
