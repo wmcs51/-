@@ -1,0 +1,9 @@
+## 基础
+Redux相当简单，不要被一些玄乎的概念搞混了。如果你构建过Flux应用，你会觉得相当简单。没有？也还是很简单!  
+这个教程将通过创建一个简单的Todo应用来了解Redux。
+- Actions
+- Reducers
+- Store
+- Data Flow
+- Usage with React
+- Todo List例子
