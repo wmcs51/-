@@ -17,7 +17,7 @@ import { ADD_TODO, REMOVE_TODO } from '../actionTypes'
 > 你不一定要把type定义成不同的模组。对于小项目，你只需要把它定义成字符串。然而把type定义在其它代码文件中有一定好处。
 
 action对象除了type之外的结构没有规定，如果乐意的话可以参考[Flux standard action](https://github.com/acdlite/flux-standard-action)。  
-我们需要再加一个action type，来描述做完了的计划项。我们需要通过`index`来指向这个计划项，因为action是以数组形式储存。实践中给每一个新东西加一个独特的ID是明智的。
+我们需要再加一个action类型，来描述做完了的计划项。我们需要通过`index`来指向这个计划项，因为action是以数组形式储存。实践中给每一个新东西加一个独特的ID是明智的。
 ```
 {
   type: TOGGLE_TODO,
