@@ -17,4 +17,4 @@ yarn add redux
 npm install react-redux
 npm install --save-dev redux-devtools
 ```
-之后介绍基础教程
+之后介绍基础教程。
