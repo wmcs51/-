@@ -1,4 +1,4 @@
-![reducer](https://images-na.ssl-images-amazon.com/images/I/A1edVtIyS2L._SX342_.jpg)
+![reducer](https://images-na.ssl-images-amazon.com/images/I/A1edVtIyS2L._SX342_.jpg)  
 Reducer确立应用state（状态）发生变化时，action怎么样发送数据至store。记住action只描述发生过了什么，不描述应用state怎么变。
 ## 设计state结构
 在Redux中，所有应用的state都存在一个单一的对象中。所以写点代码之前最好考虑下结构。怎样以最小的表现形式来描述你应用的state？  
