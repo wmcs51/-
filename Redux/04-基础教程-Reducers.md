@@ -92,6 +92,6 @@ function todoApp(state = initialState, action) {
 2. **在默认情形下我们返回了前一个state**。对于任何一个未知的action来说，必须返回前一个state。
 > `Object.assign()`属于ES6，不被老的浏览器支持。要支持老的浏览器，你可以选择使用polyfill（多补，多版本兼容工具），也就是[Bable插件](https://www.npmjs.com/package/babel-plugin-transform-object-assign)，或者其它库的工具，比如[_.assign()](https://lodash.com/docs#assign)。
 
->**`switch`和Boilerplate**
-`switch`申明不是真的boilerplate（铸模）。Flux的boilerplate是概念性的：需要发射一个更新，需要用Dispatcher在Store中注册，需要Store为一个对象（以及跨平台需求带来的棘手问题）。Redux使用纯粹的reducer解决了这些问题。
+>**`switch`和Boilerplate**  
+`switch`申明不是真的boilerplate（铸模）。Flux的boilerplate是概念性的：需要发射一个更新，需要用Dispatcher在Store中注册，需要Store为一个对象（以及跨平台需求带来的棘手问题）。Redux使用纯粹的reducer解决了这些问题。  
 不幸的是许多人还是根据是否使用`switch`声明来选择框架。如果你不喜欢`switch`，你可以用`createReducer`函数来接受匹配处理（handler map），详见[reducing boilerplate](https://redux.js.org/recipes/reducing-boilerplate#reducers)
