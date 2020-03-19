@@ -94,4 +94,54 @@ function todoApp(state = initialState, action) {
 
 >**`switch`和Boilerplate**  
 `switch`申明不是真的boilerplate（铸模）。Flux的boilerplate是概念性的：需要发射一个更新，需要用Dispatcher在Store中注册，需要Store为一个对象（以及跨平台需求带来的棘手问题）。Redux使用纯粹的reducer解决了这些问题。  
-不幸的是许多人还是根据是否使用`switch`声明来选择框架。如果你不喜欢`switch`，你可以用`createReducer`函数来接受匹配处理（handler map），详见[reducing boilerplate](https://redux.js.org/recipes/reducing-boilerplate#reducers)
+不幸的是许多人还是根据是否使用`switch`声明来选择框架。如果你不喜欢`switch`，你可以用`createReducer`函数来接受匹配处理（handler map），详见[reducing boilerplate](https://redux.js.org/recipes/reducing-boilerplate#reducers)。
+## 处理更多actions
+我们还剩两个actions要处理！就像我们对`SET_VISIBILITY_FILTER`做的那样，我们将引入`ADD_TODO`和`TOGGLE_TODO`这两个actions，然后拓展我们的reducer来处理`ADD_TODO`。
+```
+import {
+  ADD_TODO,
+  TOGGLE_TODO,
+  SET_VISIBILITY_FILTER,
+  VisibilityFilters
+} from './actions'
+
+...
+
+function todoApp(state = initialState, action) {
+  switch (action.type) {
+    case SET_VISIBILITY_FILTER:
+      return Object.assign({}, state, {
+        visibilityFilter: action.filter
+      })
+    case ADD_TODO:
+      return Object.assign({}, state, {
+        todos: [
+          ...state.todos,
+          {
+            text: action.text,
+            completed: false
+          }
+        ]
+      })
+    default:
+      return state
+  }
+}
+```
+就像之前那样，我们不要直接写state值或作用域（fields），而是返回一个新的对象。新`todos`将是旧`todos`与新计划项的级联。action中的数据构成了更新后的todo。  
+最后，`TOGGLE_TODO`的实现不该是个意外了吧：
+```
+case TOGGLE_TODO:
+  return Object.assign({}, state, {
+    todos: state.todos.map((todo, index) => {
+      if (index === action.index) {
+        return Object.assign({}, todo, {
+          completed: !todo.completed
+        })
+      }
+      return todo
+    })
+  })
+```
+因为我们想要更新数组中特定的项而不寻求替换，我们得创建一个有相同项的新数组，除了那个在action中指定了索引的项。如果你发现你经常写这种操作，可以尝试取用些帮助工具比如[immutability helper](https://github.com/kolodny/immutability-helper),[updeep](https://github.com/substantial/updeep)，甚至是原生支持深度更新的库比如[immutable](http://facebook.github.io/immutable-js/)。总之要记住在拷贝`state`之前不要往里面塞东西。
+## 分割Reducers
