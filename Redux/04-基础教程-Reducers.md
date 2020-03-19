@@ -333,6 +333,7 @@ const todoApp = combineReducers(reducers)
 > 因为`import *`也是一个新句法，我们不在这个文档中使用它以避免困惑，但你可能在社区例子中遇到它。
 
 ## 源代码
+`reducers.js`
 ```
 import { combineReducers } from 'redux'
 import {
