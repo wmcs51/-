@@ -330,3 +330,58 @@ import * as reducers from './reducers'
 
 const todoApp = combineReducers(reducers)
 ```
+> 因为`import *`也是一个新句法，我们不在这个文档中使用它以避免困惑，但你可能在社区例子中遇到它。
+
+## 源代码
+```
+import { combineReducers } from 'redux'
+import {
+  ADD_TODO,
+  TOGGLE_TODO,
+  SET_VISIBILITY_FILTER,
+  VisibilityFilters
+} from './actions'
+const { SHOW_ALL } = VisibilityFilters
+
+function visibilityFilter(state = SHOW_ALL, action) {
+  switch (action.type) {
+    case SET_VISIBILITY_FILTER:
+      return action.filter
+    default:
+      return state
+  }
+}
+
+function todos(state = [], action) {
+  switch (action.type) {
+    case ADD_TODO:
+      return [
+        ...state,
+        {
+          text: action.text,
+          completed: false
+        }
+      ]
+    case TOGGLE_TODO:
+      return state.map((todo, index) => {
+        if (index === action.index) {
+          return Object.assign({}, todo, {
+            completed: !todo.completed
+          })
+        }
+        return todo
+      })
+    default:
+      return state
+  }
+}
+
+const todoApp = combineReducers({
+  visibilityFilter,
+  todos
+})
+
+export default todoApp
+```
+## 下一步
+下一步为我们将学习怎样创建redux store，来保存state，并在dispatch action时调用reducer。
