@@ -143,5 +143,101 @@ case TOGGLE_TODO:
     })
   })
 ```
-因为我们想要更新数组中特定的项而不寻求替换，我们得创建一个有相同项的新数组，除了那个在action中指定了索引的项。如果你发现你经常写这种操作，可以尝试取用些帮助工具比如[immutability helper](https://github.com/kolodny/immutability-helper),[updeep](https://github.com/substantial/updeep)，甚至是原生支持深度更新的库比如[immutable](http://facebook.github.io/immutable-js/)。总之要记住在拷贝`state`之前不要往里面塞东西。
+因为我们想要更新数组中特定的项而不寻求替换，我们得创建一个有相同项的新数组，除了那个在action中指定了索引的项。如果你发现你经常写这种操作，可以尝试取用些帮助工具比如[immutability helper](https://github.com/kolodny/immutability-helper)，[updeep](https://github.com/substantial/updeep)，甚至是原生支持深度更新的库比如[immutable](http://facebook.github.io/immutable-js/)。总之要记住在拷贝`state`之前不要往里面塞东西。
 ## 分割Reducers
+下面是目前的代码，并不烦：
+```
+function todoApp(state = initialState, action) {
+  switch (action.type) {
+    case SET_VISIBILITY_FILTER:
+      return Object.assign({}, state, {
+        visibilityFilter: action.filter
+      })
+    case ADD_TODO:
+      return Object.assign({}, state, {
+        todos: [
+          ...state.todos,
+          {
+            text: action.text,
+            completed: false
+          }
+        ]
+      })
+    case TOGGLE_TODO:
+      return Object.assign({}, state, {
+        todos: state.todos.map((todo, index) => {
+          if (index === action.index) {
+            return Object.assign({}, todo, {
+              completed: !todo.completed
+            })
+          }
+          return todo
+        })
+      })
+    default:
+      return state
+  }
+}
+```
+有更容易理解代码的方法嘛？看上去`todos`和`visibilityFilter`是完全独立更新的。有时候state作用域有相互依赖，但在我们的例子中我们可以很容易将`todos`更新分离到新的函数中：
+```
+function todos(state = [], action) {
+  switch (action.type) {
+    case ADD_TODO:
+      return [
+        ...state,
+        {
+          text: action.text,
+          completed: false
+        }
+      ]
+    case TOGGLE_TODO:
+      return state.map((todo, index) => {
+        if (index === action.index) {
+          return Object.assign({}, todo, {
+            completed: !todo.completed
+          })
+        }
+        return todo
+      })
+    default:
+      return state
+  }
+}
+
+function todoApp(state = initialState, action) {
+  switch (action.type) {
+    case SET_VISIBILITY_FILTER:
+      return Object.assign({}, state, {
+        visibilityFilter: action.filter
+      })
+    case ADD_TODO:
+      return Object.assign({}, state, {
+        todos: todos(state.todos, action)
+      })
+    case TOGGLE_TODO:
+      return Object.assign({}, state, {
+        todos: todos(state.todos, action)
+      })
+    default:
+      return state
+  }
+}
+```
+注意`note`也接受`state`——但是`state`是个数组！现在`todoApp`让`todos`管理一部分`state`，而且`todos`知道怎么管理。**这叫做*reducer composition*，这是构建Redux应用的基础流程**。  
+让我们更多地了解reducer composition。我们可以抽离一个reducer只管理`visibilityFilter`嘛？可以。  
+在下面的引用中，让我们使用[ES6解构](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)来声明`SHOW_ALL`：
+```
+const { SHOW_ALL } = VisibilityFilters
+```
+然后：
+```
+function visibilityFilter(state = SHOW_ALL, action) {
+  switch (action.type) {
+    case SET_VISIBILITY_FILTER:
+      return action.filter
+    default:
+      return state
+  }
+}
+```
