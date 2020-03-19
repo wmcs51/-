@@ -322,3 +322,11 @@ function reducer(state = {}, action) {
   }
 }
 ```
+`combineReducers()`所做的是生成一个函数，来调用你管理**键值对应的那部分state**的reducers，然后将结果返回到单一的对象中。没什么神奇的。就像其它reducers，如果`combineReducers()`对应的reducers不改变state，它也不会产生新的对象。
+> 因为`combineReducers()`期望一个对象，我可以将所有高层级reducer放到分离的文件中，并`export`每个reducer函数，用`import * as reducers`以对象形式获取它们，用其名字作为键值：
+```
+import { combineReducers } from 'redux'
+import * as reducers from './reducers'
+
+const todoApp = combineReducers(reducers)
+```
