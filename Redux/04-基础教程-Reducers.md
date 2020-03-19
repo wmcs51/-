@@ -224,7 +224,7 @@ function todoApp(state = initialState, action) {
   }
 }
 ```
-注意`note`也接受`state`——但是`state`是个数组！现在`todoApp`让`todos`管理一部分`state`，而且`todos`知道怎么管理。**这叫做*reducer composition*，这是构建Redux应用的基础流程**。  
+注意`todos`也接受`state`——但是`state`是个数组！现在`todoApp`让`todos`管理一部分`state`，而且`todos`知道怎么管理。**这叫做*reducer composition*，这是构建Redux应用的基础流程**。  
 让我们更多地了解reducer composition。我们可以抽离一个reducer只管理`visibilityFilter`嘛？可以。  
 在下面的引用中，让我们使用[ES6解构](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)来声明`SHOW_ALL`：
 ```
@@ -238,6 +238,87 @@ function visibilityFilter(state = SHOW_ALL, action) {
       return action.filter
     default:
       return state
+  }
+}
+```
+现在我们可以重写主reducer，将其作为一个调用其它部分管理state的reducer的函数。现在也不需要知道所有初始的state。因为当state参数为undefined时，每个子reducers都会返回初始state。
+```
+function todos(state = [], action) {
+  switch (action.type) {
+    case ADD_TODO:
+      return [
+        ...state,
+        {
+          text: action.text,
+          completed: false
+        }
+      ]
+    case TOGGLE_TODO:
+      return state.map((todo, index) => {
+        if (index === action.index) {
+          return Object.assign({}, todo, {
+            completed: !todo.completed
+          })
+        }
+        return todo
+      })
+    default:
+      return state
+  }
+}
+
+function visibilityFilter(state = SHOW_ALL, action) {
+  switch (action.type) {
+    case SET_VISIBILITY_FILTER:
+      return action.filter
+    default:
+      return state
+  }
+}
+
+function todoApp(state = {}, action) {
+  return {
+    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
+    todos: todos(state.todos, action)
+  }
+}
+```
+**注意每个reducers都管理自己的那部分全局state。`state`参数对于每个reducer都是不同的，只对应其管理的那部分。**  
+这看起来已经很棒了！当应用变庞大时，我们可以将reducers拆分到不同文件中，使它们完全独立，只管理自己那部分。  
+最后，Redux提供了一个叫[combineReducers()](https://redux.js.org/api/combinereducers)的实用程序，和上面的`todoApp`函数逻辑类似。有了这个程序后，我们可以像这样重写`todoApp`：
+```
+import { combineReducers } from 'redux'
+
+const todoApp = combineReducers({
+  visibilityFilter,
+  todos
+})
+
+export default todoApp
+```
+这和下面的代码是等价的：
+```
+export default function todoApp(state = {}, action) {
+  return {
+    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
+    todos: todos(state.todos, action)
+  }
+}
+```
+你可以给他们不同的键值，或者调用不同的函数。这两种方式写组合reducer是等价的：
+```
+const reducer = combineReducers({
+  a: doSomethingWithA,
+  b: processB,
+  c: c
+})
+```
+```
+function reducer(state = {}, action) {
+  return {
+    a: doSomethingWithA(state.a, action),
+    b: processB(state.b, action),
+    c: c(state.c, action)
   }
 }
 ```
