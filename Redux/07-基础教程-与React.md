@@ -312,7 +312,7 @@ export default App
 ```
 ## 传Store。
 所有容器组件都需要访问Redux store来订阅它。一种方法是将它传给每个容器组件。但这样太烦了，你甚至需要传给展示组件，因为它偶尔会渲染组件中的某个容器。  
-我们建议的方法是使用一个特殊的React Redux组件，叫做<Provider>。使其包含的组件都能获取store而不用显性传入。你只需要在渲染它的根组件中使用一次。  
+我们建议的方法是使用一个特殊的React Redux组件，叫做`<Provider>`。其包含的组件都能获取store而不用显性传入。你只需要在渲染它的根组件中使用一次。  
   `index.js`
 ```
 import React from 'react'
@@ -331,3 +331,6 @@ render(
   document.getElementById('root')
 )
 ```
+## 下一步
+阅读本教程的完整源码可以更好地内化你学到的只是。之后你可以去学高级教程，学习处理网络请求和路由！  
+你也应花点时间去学习[React-Redux文档](https://react-redux.js.org/)，来更好的了解怎样一起使用React和Redux。
