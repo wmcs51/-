@@ -23,10 +23,10 @@ React Redux绑定会区分*presentational展示*组件和*container容器*组件
 原理上你可以自己写容器组件，通过使用[store.subscribe()](https://redux.js.org/api/store#subscribelistener)。我们不建议这样做，因为React Redux做了很多靠手写代码没法完成的性能优化。因此，与其手写容器组件，我们会通过React Redux提供的[connect()](https://react-redux.js.org/api/connect#connect)函数生成它，你将在下文中看到。
 ## 设计组件层级
 还记得怎样设计根state对象嘛？是时候设计UI层级来匹配它。这不是Redux该完成的任务。[以React思考](https://facebook.github.io/react/docs/thinking-in-react.html)将是解释这个过程的绝佳教程。
-我们的设计概要很简单。我们想要展示一列todo项。点一下，todo项就会被划去，表示完成了。我们项要一个输入框，用户可以输入新的todo项。在底部，我们想要展示一个功能键，来展示所有，或者完成了的，或者有效的todo项。
+我们的设计概要很简单。我们想要展示一列todo项。点一下，todo项就会被划去，表示完成了。我们想要一个输入框，用户可以输入新的todo项。在底部，我们想要展示一个功能键，来展示所有，或者完成了的，或者有效的todo项。
 ### 设计展示组件
 下面的列表是我需要的展示组件,其中子列表是组件的props：
-* `TdoList`展示可视todo的列表
+* `TodoList`展示可视todo的列表
   - `todo: Array`是todo项的数组，{id，text, completed}这样表示
   - `onTodoClick(id: number)`是点击todo项时触发的回调
 * `Todo`是单一todo项。
@@ -40,3 +40,9 @@ React Redux绑定会区分*presentational展示*组件和*container容器*组件
 
 它们描述长什么样但是不知道数据从哪来怎么改。它们只渲染给它们的。如果你将这些组件从Redux中移植出去，它们的还是会有相同的表现。它们不依赖Redux。
 ### 设计容器组件
+我们也需要一些容器组件将展示组件连接到Redux。例如，展示性的`TodoList`组件需要像`VisibleTodoList`这样的容器来订阅Redux store，以获知如何应用当前的可视设定。为改变可视设定，我们将提供一个`FilterLink`的容器组件，来渲染一个点击后dispatch action的`Link`组件：
+- `VisibleTodoList`根据当前的可视设定过滤todo项，并渲染`TodoList`
+- `FilterLink`获取当前的可视设定，渲染一个`Link`。
+  * `filter:string`表示可视设定。
+  
+### 设计其它组件
