@@ -193,7 +193,7 @@ const VisibleTodoList = connect(mapStateToProps, mapDispatchToProps)(TodoList)
 
 export default VisibleTodoList
 ```
-这些是React Redux API的基础，但这里还有些简短有力的选项，所以我们建议你去详细核对[其文档]（https://github.com/reduxjs/react-redux）。比如你担心`mapStateToProps`创建了太多的新对象， 你可以去学习[reselect](https://github.com/reduxjs/reselect)来[计算取得的数据](https://redux.js.org/recipes/computing-derived-data)。  
+这些是React Redux API的基础，但这里还有些简短有力的选项，所以我们建议你去详细核对[其文档](https://github.com/reduxjs/react-redux)。比如你担心`mapStateToProps`创建了太多的新对象， 你可以去学习[reselect](https://github.com/reduxjs/reselect)来[计算取得的数据](https://redux.js.org/recipes/computing-derived-data)。  
 下面是其它容器组件：
 `containers/FilterLink.js`
 ```
