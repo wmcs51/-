@@ -10,4 +10,4 @@ npm install react-redux
 ```
 你也可以使用UMD包（[测试](https://unpkg.com/react-redux@latest/dist/react-redux.js)环境或[生产](https://unpkg.com/react-redux@latest/dist/react-redux.min.js)环境都可以）。UMD包会输出一个`window.ReactRedux`的全局对象，只要加到你的网页`<script>`标签中。
 ## 展示组件和容器组件
-React Redux绑定会区分*presentational（展示）*组件和*container（容器）*组件。这将使你的应用更容易理解和复用。下面使展示组件和容器组件的区别（如果你不熟悉的话，我们建议你阅读这篇[文章](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)）:
+React Redux绑定会区分*presentational（展示）*组件和*container（容器）*组件。这将使你的应用更容易理解和复用。下面将展示组件和容器组件的区别（如果你不熟悉的话，我们建议你阅读这篇[文章](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)）:
