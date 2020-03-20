@@ -26,15 +26,17 @@ React Redux绑定会区分*presentational展示*组件和*container容器*组件
 我们的设计概要很简单。我们想要展示一列todo项。点一下，todo项就会被划去，表示完成了。我们项要一个输入框，用户可以输入新的todo项。在底部，我们想要展示一个功能键，来展示所有，或者完成了的，或者有效的todo项。
 ### 设计展示组件
 下面的列表是我需要的展示组件,其中子列表是组件的props：
-* **`TdoList`**展示可视todo的列表
+* `TdoList`展示可视todo的列表
   - `todo: Array`是todo项的数组，{id，text, completed}这样表示
   - `onTodoClick(id: number)`是点击todo项时触发的回调
-* **`Todo`**是单一todo项。
+* `Todo`是单一todo项。
   - `text: string`是展示的文本
   - `completed: boolean`是todo项是否进行展示的布尔值
   - `onClick()`是点击todo项时触发的回调
-* **`Link`**是带有回调的连接
+* `Link`是带有回调的连接
   - `onClick()`是点击link时触发的回调
-* **`Footer`**是让用户改变可视todo项的区域
-* **`App`**是根组件，渲染所有东西
+* `Footer`是让用户改变可视todo项的区域
+* `App`是根组件，渲染所有东西
 
+它们描述长什么样但是不知道数据从哪来怎么改。它们只渲染给它们的。如果你将这些组件从Redux中移植出去，它们的还是会有相同的表现。它们不依赖Redux。
+### 设计容器组件
