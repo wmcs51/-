@@ -52,3 +52,104 @@ React Redux绑定会区分*presentational展示*组件和*container容器*组件
 ## 实现组件
 让我们写这些组件！先从展示组件开始，它暂时不需要绑定Redux。
 ### 实现展示组件
+这些都是普通的React组件，所以我们不进行深究。我们将使用无state函数组件，直到我们需要使用本地state或生命周期方法。这不意味着展示组件必须是函数，这只是定义起来比较方便。如果你需要添加本地state，声明周期方法，或者进行优化，你可以将其转化为state组件。
+`components/Todo.js`
+```
+import React from 'react'
+import PropTypes from 'prop-types'
+
+const Todo = ({ onClick, completed, text }) => (
+  <li
+    onClick={onClick}
+    style={{
+      textDecoration: completed ? 'line-through' : 'none'
+    }}
+  >
+    {text}
+  </li>
+)
+
+Todo.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  completed: PropTypes.bool.isRequired,
+  text: PropTypes.string.isRequired
+}
+
+export default Todo
+```
+`components/TodoList.js`
+```
+import React from 'react'
+import PropTypes from 'prop-types'
+import Todo from './Todo'
+
+const TodoList = ({ todos, onTodoClick }) => (
+  <ul>
+    {todos.map((todo, index) => (
+      <Todo key={index} {...todo} onClick={() => onTodoClick(index)} />
+    ))}
+  </ul>
+)
+
+TodoList.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      completed: PropTypes.bool.isRequired,
+      text: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired,
+  onTodoClick: PropTypes.func.isRequired
+}
+
+export default TodoList
+```
+`components/Link.js`
+```
+import React from 'react'
+import PropTypes from 'prop-types'
+
+const Link = ({ active, children, onClick }) => {
+  if (active) {
+    return <span>{children}</span>
+  }
+
+  return (
+    <a
+      href=""
+      onClick={e => {
+        e.preventDefault()
+        onClick()
+      }}
+    >
+      {children}
+    </a>
+  )
+}
+
+Link.propTypes = {
+  active: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired
+}
+
+export default Link
+```
+`components/Footer.js`
+```
+import React from 'react'
+import FilterLink from '../containers/FilterLink'
+import { VisibilityFilters } from '../actions'
+
+const Footer = () => (
+  <p>
+    Show: <FilterLink filter={VisibilityFilters.SHOW_ALL}>All</FilterLink>
+    {', '}
+    <FilterLink filter={VisibilityFilters.SHOW_ACTIVE}>Active</FilterLink>
+    {', '}
+    <FilterLink filter={VisibilityFilters.SHOW_COMPLETED}>Completed</FilterLink>
+  </p>
+)
+
+export default Footer
+```
