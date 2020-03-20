@@ -38,7 +38,7 @@ React Redux绑定会区分*presentational展示*组件和*container容器*组件
 * `Footer`是让用户改变可视todo项的区域
 * `App`是根组件，渲染所有东西
 
-它们描述长什么样但是不知道数据从哪来怎么改。它们只渲染给它们的。如果你将这些组件从Redux中移植出去，它们的还是会有相同的表现。它们不依赖Redux。
+展示组件描述UI长什么样但是不知道数据从哪来怎么修改。它们只渲染已有内容。如果你将这些组件从Redux中移植出去，它们的还是会有相同的表现。它们不依赖Redux。
 ### 设计容器组件
 我们也需要一些容器组件将展示组件连接到Redux。例如，展示性的`TodoList`组件需要像`VisibleTodoList`这样的容器来订阅Redux store，以获知如何应用当前的可视设定。为改变可视设定，我们将提供一个`FilterLink`的容器组件，来渲染一个点击后dispatch action的`Link`组件：
 - `VisibleTodoList`根据当前的可视设定过滤todo项，并渲染`TodoList`
