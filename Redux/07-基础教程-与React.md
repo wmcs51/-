@@ -52,7 +52,7 @@ React Redux绑定会区分*presentational展示*组件和*container容器*组件
 ## 实现组件
 让我们写这些组件！先从展示组件开始，它暂时不需要绑定Redux。
 ### 实现展示组件
-这些都是普通的React组件，所以我们不进行深究。我们将使用无state函数组件，直到我们需要使用本地state或生命周期方法。这不意味着展示组件必须是函数，这只是定义起来比较方便。如果你需要添加本地state，声明周期方法，或者进行优化，你可以将其转化为state组件。
+这些都是普通的React组件，所以我们不进行深究。我们将使用无state函数组件，直到我们需要使用本地state或生命周期方法。这不意味着展示组件必须是函数，这只是定义起来比较方便。如果你需要添加本地state，声明周期方法，或者进行优化，你可以将其转化为state组件。  
 `components/Todo.js`
 ```
 import React from 'react'
@@ -152,4 +152,182 @@ const Footer = () => (
 )
 
 export default Footer
+```
+### 实现容器组件
+好，现在可以将这些展示组件通过容器组件挂到Redux上。技术上，容器组件是一种使用了[store.subscribe()](https://redux.js.org/api/store#subscribelistener)的React组件，用以读取Redux的state树，给提供它渲染的展示组件提供props。还是那句话，你可以手写容器组件，但我们建议使用React Redux库的[connect()](https://react-redux.js.org/using-react-redux/connect-mapstate)方法，可以提供很多性能优化，避免不必要的渲染。（有点之一是你不要再担心自己取实现React性能建议中的`shouldComponentUpdate`）。  
+要用到`connect`，你需要定义一个特殊的函数叫做`mapStateToProps`，用于将当前Redux store中的state作为props传入容器中的展示组件。例如，`VisibleTodoList`这个容器组件需要计算`todos`，并传入`Todolist`这个展示组件，因而我们定义一个根据`state.visibilityFilter`过滤`state.todos`的函数，在`mapStateToProps`函数中使用它：
+```
+const getVisibleTodos = (todos, filter) => {
+  switch (filter) {
+    case 'SHOW_COMPLETED':
+      return todos.filter(t => t.completed)
+    case 'SHOW_ACTIVE':
+      return todos.filter(t => !t.completed)
+    case 'SHOW_ALL':
+    default:
+      return todos
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+  }
+}
+```
+除了读取state，容器组件也能dispatch actions。类似的，你可以定义一个叫做`mapDispatchToProps()`的函数，以`dispatch()`方法作为参数，返回你想要注入展示组件的回调props。例如，我们想让`VisibleTodoList`这个容器组件发射一个叫做`onTodoClick`的prop，注入`TodoList`展示组件，我们也想要`onTodoClick`dispatch一个叫`TOGGLE_TODO`的action：
+```
+const mapDispatchToProps = dispatch => {
+  return {
+    onTodoClick: id => {
+      dispatch(toggleTodo(id))
+    }
+  }
+}
+```
+最后，我们通过调用`connect()`并传入上述两个函数创建`VisibleTodoList`这个容器组件：
+```
+import { connect } from 'react-redux'
+
+const VisibleTodoList = connect(mapStateToProps, mapDispatchToProps)(TodoList)
+
+export default VisibleTodoList
+```
+这些是React Redux API的基础，但这里还有些简短有力的选项，所以我们建议你去详细核对[其文档]（https://github.com/reduxjs/react-redux）。比如你担心`mapStateToProps`创建了太多的新对象， 你可以去学习[reselect](https://github.com/reduxjs/reselect)来[计算取得的数据](https://redux.js.org/recipes/computing-derived-data)。  
+下面是其它容器组件：
+`containers/FilterLink.js`
+```
+import { connect } from 'react-redux'
+import { setVisibilityFilter } from '../actions'
+import Link from '../components/Link'
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    active: ownProps.filter === state.visibilityFilter
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onClick: () => {
+      dispatch(setVisibilityFilter(ownProps.filter))
+    }
+  }
+}
+
+const FilterLink = connect(mapStateToProps, mapDispatchToProps)(Link)
+
+export default FilterLink
+```
+`containers/VisibleTodoList.js`
+```
+import { connect } from 'react-redux'
+import { toggleTodo } from '../actions'
+import TodoList from '../components/TodoList'
+
+const getVisibleTodos = (todos, filter) => {
+  switch (filter) {
+    case 'SHOW_ALL':
+      return todos
+    case 'SHOW_COMPLETED':
+      return todos.filter(t => t.completed)
+    case 'SHOW_ACTIVE':
+      return todos.filter(t => !t.completed)
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onTodoClick: id => {
+      dispatch(toggleTodo(id))
+    }
+  }
+}
+
+const VisibleTodoList = connect(mapStateToProps, mapDispatchToProps)(TodoList)
+
+export default VisibleTodoList
+```
+## 实现其它组件
+`containers/AddTodo.js`
+回忆一下之前提到的，`AddTodo`组件的展示和逻辑混合到了同一个定义中。
+```
+import React from 'react'
+import { connect } from 'react-redux'
+import { addTodo } from '../actions'
+
+let AddTodo = ({ dispatch }) => {
+  let input
+
+  return (
+    <div>
+      <form
+        onSubmit={e => {
+          e.preventDefault()
+          if (!input.value.trim()) {
+            return
+          }
+          dispatch(addTodo(input.value))
+          input.value = ''
+        }}
+      >
+        <input
+          ref={node => {
+            input = node
+          }}
+        />
+        <button type="submit">Add Todo</button>
+      </form>
+    </div>
+  )
+}
+AddTodo = connect()(AddTodo)
+
+export default AddTodo
+```
+如果你不熟悉`ref`属性，请阅读这份[文档](https://facebook.github.io/react/docs/refs-and-the-dom.html)来正确使用它。
+### 将容器组件合起来
+`components/App.js`
+```
+import React from 'react'
+import Footer from './Footer'
+import AddTodo from '../containers/AddTodo'
+import VisibleTodoList from '../containers/VisibleTodoList'
+
+const App = () => (
+  <div>
+    <AddTodo />
+    <VisibleTodoList />
+    <Footer />
+  </div>
+)
+
+export default App
+```
+## 传Store。
+所有容器组件都需要访问Redux store来订阅它。一种方法是将它传给每个容器组件。但这样太烦了，你甚至需要传给展示组件，因为它偶尔会渲染组件中的某个容器。  
+我们建议的方法是使用一个特殊的React Redux组件，叫做<Provider>。使其包含的组件都能获取store而不用显性传入。你只需要在渲染它的根组件中使用一次。  
+  `index.js`
+```
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import todoApp from './reducers'
+import App from './components/App'
+
+const store = createStore(todoApp)
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
 ```
