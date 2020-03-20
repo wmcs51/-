@@ -154,7 +154,7 @@ const Footer = () => (
 export default Footer
 ```
 ### 实现容器组件
-好，现在可以将这些展示组件通过容器组件挂到Redux上。技术上，容器组件是一种使用了[store.subscribe()](https://redux.js.org/api/store#subscribelistener)的React组件，用以读取Redux的state树，给它渲染的展示组件提供props。还是那句话，你可以手写容器组件，但我们建议使用React Redux库的[connect()](https://react-redux.js.org/using-react-redux/connect-mapstate)方法，可以提供很多性能优化，避免不必要的渲染。（有点就是你不用再担心自己取实现[React性能建议](https://facebook.github.io/react/docs/advanced-performance.html)中的`shouldComponentUpdate`）。  
+好，现在可以将这些展示组件通过容器组件挂到Redux上。技术上，容器组件是一种使用了[store.subscribe()](https://redux.js.org/api/store#subscribelistener)的React组件，用以读取Redux的state树，给它渲染的展示组件提供props。还是那句话，你可以手写容器组件，但我们建议使用React Redux库的[connect()](https://react-redux.js.org/using-react-redux/connect-mapstate)方法，可以提供很多性能优化，避免不必要的渲染。（有一点就是你不用再担心自己去实现[React性能建议](https://facebook.github.io/react/docs/advanced-performance.html)中的`shouldComponentUpdate`）。  
 要用到`connect`，你需要定义一个特殊的函数叫做`mapStateToProps`，用于将当前Redux store中的state作为props传入容器中的展示组件。例如，`VisibleTodoList`这个容器组件需要计算`todos`，并传入`Todolist`这个展示组件，因而我们定义一个根据`state.visibilityFilter`过滤`state.todos`的函数，在`mapStateToProps`函数中使用它：
 ```
 const getVisibleTodos = (todos, filter) => {
