@@ -11,3 +11,8 @@ HTML有下面这些行内元素：
 `<a>` `<abbr>` `<acronym>` `<b>` `<bdo>` `<big>` `<br>` `<button>` `<cite>` `<code>` `<dfn>`  
 `<em>` `<i>` `<img>` `<input>` `<kbd>` `<label>` `<map>` `<object>` `<output>` `<q>` `<samp>`  
 `<script>` `<select>` `<small>` `<span>` `<strong>` `<sub>` `<sup>` `<textarea>` `<time>` `<tt>` `<var>`
+## `<div>`元素
+`<div>`元素常作为其它HTML元素的块级容器。  
+## `<span>`元素
+`<span>`元素长作为一些文本的行内容器。
+ps：完整的[HTML标签应用](https://www.w3schools.com/tags/default.asp)
