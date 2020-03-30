@@ -96,4 +96,4 @@ HTML也支持描述列表。
 - HTML`<dd>`元素定义描述列表项的描述
 - 列表可以进行嵌套
 - 列表可以包含其它HTML元素
-- 通过CSS`float:left``display:inline`横向展示列表
+- 通过CSS`float:left`和`display:inline`横向展示列表
