@@ -56,3 +56,18 @@ p    {color: red;}
 </body>
 </html>
 ```
+
+一个外部样式表可以在任意文本编辑器中编写。该文件不能有HTML代码，必须以.css格式进行保存。  
+下面是"style.css"的内容：
+```
+body {
+  background-color: powderblue;
+}
+h1 {
+  color: blue;
+}
+p {
+  color: red;
+}
+```
+ps: 更多内容在CSS中进行学习。
