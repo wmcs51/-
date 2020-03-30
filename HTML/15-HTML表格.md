@@ -98,3 +98,14 @@ th, td {
 **注意**：`<caption>`标签立即跟随在`<table>`标签后。
 ## 章节总结
 - 使用`<table>`元素定义表格
+- 使用`<tr>`元素定义表格的一行
+- 使用`<th>`元素定义表头的格子
+- 使用`<td>`元素定义表格的格子
+- 使用`<caption>`元素定义表格的标题
+- 使用CSS`border`定义边框
+- 使用CSS`border-collaps`合并边框
+- 使用CSS`padding`添加padding
+- 使用CSS`text-align`对齐文本
+- 使用CSS`border-spacing`设置格子的边框间距
+- 使用`colspan`属性使格子跨列
+- 使用`rowspan`属性使格子跨行
