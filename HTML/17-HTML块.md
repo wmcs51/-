@@ -2,4 +2,6 @@
 ## 块级元素
 块级元素永远会起新的一行，并占据所有宽度。  
 HTML有下面这些块级元素：  
-`<address>` `<article>` `<aside>`
+`<address>` `<article>` `<aside>` `<blockquote>` `<canvas>` `<dd>` `<div>` `<dl>` `<dt>` `<fieldset>` `<figcaption>`  
+`<figure>` `<footer>` `<form>` `<h1>-<h6>` `<header>` `<hr>` `<li>` `<main>` `<nav>` `<noscript>` `<ol>`  
+`<p>` `<pre>` `<section>` `<table>` `<tfoot>` `<ul>` `<video>`
