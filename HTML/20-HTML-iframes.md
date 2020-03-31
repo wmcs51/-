@@ -15,3 +15,15 @@ HTML iframe由`<iframe>`标签定义：
 <iframe src="demo_iframe.htm" style="height:200px;width:300px;"></iframe>
 ```
 ## Iframe移除边框
+iframe默认有边框。为了移除边框，可以使用CSS`border`特性：
+```
+<iframe src="demo_iframe.htm" style="border:none;"></iframe>
+```
+## Iframe-链接
+iframe可以被用作打开链接。
+链接的`target`属性必须指向iframe的`name`属性：
+```
+<iframe src="demo_iframe.htm" name="iframe_a"></iframe>
+
+<p><a href="https://www.w3schools.com" target="iframe_a">W3Schools.com</a></p>
+```
